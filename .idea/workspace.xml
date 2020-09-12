@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1128242-2046-4d94-a2f8-4831e52ab01d" name="Default Changelist" comment="" />
+    <list default="true" id="f1128242-2046-4d94-a2f8-4831e52ab01d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/components/Button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/GameSector.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/GameSector.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/components/SimonGame.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/components/SimonGame.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +26,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\job\flutter\tests\flutter_simon_game\.idea" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1hKPwp3O4GInCfmhGBIpZyX9VJ2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -24,6 +47,9 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -45,45 +71,53 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1032" y="182" key="#Dart/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599773811036" />
+    <state x="876" y="258" key="#PSD" timestamp="1599910961000">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="876" y="258" key="#PSD/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599910961000" />
     <state x="1196" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599827423069">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1196" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599827423069" />
+    <state x="1170" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599933767970">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1170" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599933767970" />
     <state x="1224" y="276" key="FileChooserDialogImpl" timestamp="1599827295833">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1224" y="276" key="FileChooserDialogImpl/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599827295833" />
-    <state width="459" height="178" key="GridCell.Tab.0.bottom" timestamp="1599870505930">
+    <state width="914" height="217" key="GridCell.Tab.0.bottom" timestamp="1599933768172">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="459" height="178" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599870505930" />
-    <state width="459" height="178" key="GridCell.Tab.0.center" timestamp="1599870505929">
+    <state width="914" height="217" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599933768172" />
+    <state width="914" height="217" key="GridCell.Tab.0.center" timestamp="1599933768172">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="459" height="178" key="GridCell.Tab.0.center/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599870505929" />
-    <state width="459" height="178" key="GridCell.Tab.0.left" timestamp="1599870505929">
+    <state width="914" height="217" key="GridCell.Tab.0.center/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599933768172" />
+    <state width="914" height="217" key="GridCell.Tab.0.left" timestamp="1599933768172">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="459" height="178" key="GridCell.Tab.0.left/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599870505929" />
-    <state width="459" height="178" key="GridCell.Tab.0.right" timestamp="1599870505930">
+    <state width="914" height="217" key="GridCell.Tab.0.left/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599933768172" />
+    <state width="914" height="217" key="GridCell.Tab.0.right" timestamp="1599933768172">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="459" height="178" key="GridCell.Tab.0.right/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599870505930" />
-    <state x="922" y="164" key="SettingsEditor" timestamp="1599861850070">
+    <state width="914" height="217" key="GridCell.Tab.0.right/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599933768172" />
+    <state x="761" y="249" key="SettingsEditor" timestamp="1599929260322">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="922" y="164" key="SettingsEditor/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599861850070" />
+    <state x="761" y="249" key="SettingsEditor/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599929260322" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1599770873689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599770873689" />
-    <state x="93" y="100" width="1362" height="847" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599837095675">
+    <state x="93" y="100" width="1362" height="847" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599935652803">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="93" y="100" width="1362" height="847" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599837095675" />
-    <state x="1136" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1599826898459">
+    <state x="93" y="100" width="1362" height="847" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599935652803" />
+    <state x="1136" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1599931967009">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1136" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599826898459" />
+    <state x="1136" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040/-1024.310.1024.728@0.0.1920.1040" timestamp="1599931967009" />
   </component>
 </project>

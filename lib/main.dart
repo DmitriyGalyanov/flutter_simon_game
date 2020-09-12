@@ -12,12 +12,6 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.purpleAccent
         ),
         home: SimonGame(0)
-        // Scaffold(
-        //   appBar: AppBar(
-        //     title: Text('Simon Game')
-        //   ),
-        //   body: SimonGame(0)
-        // )
     );
   }
 }

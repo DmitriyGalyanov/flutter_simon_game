@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 
+import 'package:audioplayers/audio_cache.dart';
+
 import 'package:flutter_simon_game/components/GameSector.dart';
+import 'package:flutter_simon_game/components/Button.dart';
 
 class SimonGame extends StatefulWidget {
   final int index;
@@ -14,15 +17,29 @@ class SimonGame extends StatefulWidget {
 }
 
 class _SimonGameState extends State<SimonGame> {
+  // final player = AudioCache();
+  // preloadAudio() {
+  //   player.loadAll(['0.ogg', '1.ogg', '2.ogg', '3.ogg']);
+  // }
+  void playAudio(int sectorId) {
+    //TODO: ADD SECTOR ID HERE
+    AudioCache player = AudioCache();
+    // player.play('$sectorId.ogg');
+    player.play('sample.mp3');
+  }
+
   // GAME VARIABLES -- START
-  int timeout = 1000; //milliseconds //level
-  String language = 'en';
-  int roundNumber = 10;
+  int timeout = 1000; //TODO: ADD TIMEOUT CHANGE
+  String language = 'en'; //TODO: ADD LANGUAGE CHANGE
+  int roundNumber = 0;
   bool isGameOn = false;
   bool isUserFail = false;
   bool isBlinking = false;
+  int gameSelectedAtRoundNumber = 0;
+  List<int> gameSelectedSectorsList;
+  List<int> userSelectedSectorsList = [];
 
-  void setLevel(int value) {
+  void setTimeout(int value) {
     setState(() {
       timeout = value;
     });
@@ -59,8 +76,67 @@ class _SimonGameState extends State<SimonGame> {
     });
   }
 
+  void setGameSelectedSectorsList() {
+    if (gameSelectedAtRoundNumber == roundNumber) return;
+    List<int> data = [];
+    for (int i = 0; i < roundNumber; i++) {
+      data.add(Random().nextInt(4));
+    }
+    setState(() {
+      gameSelectedSectorsList = data;
+      gameSelectedAtRoundNumber = roundNumber;
+    });
+  }
+
+  void addUserSelectedSector(int id) {
+    userSelectedSectorsList.add(id);
+  }
+
+  void clearUserSelectedSectors() {
+    userSelectedSectorsList.clear();
+  }
+
   // GAME VARIABLES -- END
   //
+  void startGame() {
+    clearUserSelectedSectors();
+    setIsGameOn(true);
+    setIsUserFail(false);
+    setState(() {
+      roundNumber = 1;
+    });
+    setGameSelectedSectorsList();
+    blinkSectors();
+  }
+
+  void startNextRound() {
+    clearUserSelectedSectors();
+    increaseRoundNumber();
+    setGameSelectedSectorsList();
+    blinkSectors();
+  }
+
+  void repeatHighlight() {
+    if (isBlinking) return;
+    clearUserSelectedSectors();
+    blinkSectors();
+  }
+
+  void tryLostRound() {
+    setIsUserFail(false);
+    setIsGameOn(true);
+    repeatHighlight();
+  }
+
+  checkIfUserFail(sectorId) {
+    print(gameSelectedSectorsList[userSelectedSectorsList.length - 1]);
+    if (gameSelectedSectorsList[userSelectedSectorsList.length - 1] !=
+        sectorId) {
+      setIsUserFail(true);
+      setIsGameOn(false);
+    }
+  }
+
   // SECTORS -- START
   List<dynamic> sectorsInit = [
     //List<Map<String, dynamic>>
@@ -70,34 +146,45 @@ class _SimonGameState extends State<SimonGame> {
     {'id': 3, 'color': Colors.cyan, 'isHighlighted': false},
   ];
 
-  void blinkSector(int id) {
-    print(600.0.floor());
+  void blinkSector(int sectorId) {
+    //TODO: ADD AUDIO
+    // playAudio(sectorId); TODO: FIX THAT
     setState(() {
-      sectorsInit[id]['isHighlighted'] = true;
+      sectorsInit[sectorId]['isHighlighted'] = true;
     });
     Timer(
         Duration(milliseconds: 200),
         () => {
               setState(() {
-                sectorsInit[id]['isHighlighted'] = false;
+                sectorsInit[sectorId]['isHighlighted'] = false;
               })
             });
   }
 
-  void blinkSectors() async { //void
-    for (final sectorId in gameSelectedSectorsArray()) {
+  void blinkSectors() async {
+    setIsBlinking(true);
+    for (final sectorId in gameSelectedSectorsList) {
       await Future.delayed(Duration(milliseconds: timeout));
       blinkSector(sectorId);
     }
+    await Future.delayed(Duration(milliseconds: (timeout / 2).floor()));
+    setIsBlinking(false);
   }
 
-  void handleSectorTap(int id) {
-    blinkSector(id);
-    addUserSelectedSector(id);
-    print(userSelectedSectorsList);
+  void handleSectorTap(int sectorId) {
+    if (isBlinking) return;
+    blinkSector(sectorId);
+    if (!isGameOn) return;
+    addUserSelectedSector(sectorId);
+    checkIfUserFail(sectorId);
+    if (!isUserFail &&
+        gameSelectedSectorsList.length == userSelectedSectorsList.length) {
+      startNextRound();
+    }
   }
 
   Wrap _buildSectors() {
+    //TODO: TRY STACK WITH CLIPPING
     List<Widget> sectors = [];
     sectorsInit.forEach((sector) {
       sectors.add(GameSector(
@@ -119,52 +206,82 @@ class _SimonGameState extends State<SimonGame> {
 
   // SECTORS -- END
   //
-  // GET GAME SELECTED SECTORS LIST -- START
-  List<int> gameSelectedSectorsArray() {
-    List<int> data = [];
-    for (int i = 0; i < roundNumber; i++) {
-      data.add(Random().nextInt(4));
-    }
-    return data;
-  }
-
-  // GET GAME SELECTED SECTORS LIST -- END
-  //
-  // USER SELECTED SECTORS LIST -- START
-  List<int> userSelectedSectorsList = [];
-
-  void addUserSelectedSector(int id) {
-    userSelectedSectorsList.add(id);
-  }
-
-  // USER SELECTED SECTORS LIST -- END
-
   @override
   Widget build(BuildContext context) {
+    //TODO: edit view
+    //TODO: (!HORIZONTAL VIEW!)
     return Scaffold(
       appBar: AppBar(title: Text('Simon Game')),
-      body: Container(
-        margin: EdgeInsets.only(top: 6.0),
-        child: Center(
-          child: Wrap(
-            direction: Axis.vertical,
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.only(top: 6.0),
+          child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.only(right: 8.0, top: 7.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Round number: $roundNumber',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              Wrap(
+                direction: Axis.horizontal, //vertical
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 8.0, top: 7.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Round number: $roundNumber',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0),
+                        ),
+                        if (!isGameOn)
+                          Button(
+                            label: 'Start new game',
+                            handleTap: startGame,
+                          ),
+                        if (isGameOn)
+                          Button(
+                              label: 'Repeat highlight',
+                              handleTap: repeatHighlight,
+                              isDisabled: isBlinking ? true : false),
+                        if (isUserFail)
+                          Button(
+                            label: 'Try last round again',
+                            handleTap: tryLostRound,
+                          ),
+                      ],
                     ),
-                    OutlineButton(
-                      child: Text('Start blinking'),
-                      onPressed: blinkSectors,
-                    )
-                  ],
-                ),
+                  ),
+                  _buildSectors(),
+                ],
               ),
-              _buildSectors(),
+              Column(children: [
+                RadioListTile(
+                  title: Text(
+                    'easy',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
+                  value: 1500,
+                  groupValue: timeout,
+                  onChanged: isBlinking ? null : (value) => setTimeout(value),
+                ),
+                RadioListTile(
+                  title: Text(
+                    'medium',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
+                  value: 1000,
+                  groupValue: timeout,
+                  onChanged: isBlinking ? null : (value) => setTimeout(value),
+                ),
+                RadioListTile(
+                  title: Text(
+                    'hard',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
+                  value: 500,
+                  groupValue: timeout,
+                  onChanged: isBlinking ? null : (value) => setTimeout(value),
+                ),
+              ])
             ],
           ),
         ),
@@ -173,19 +290,37 @@ class _SimonGameState extends State<SimonGame> {
         color: Theme.of(context).primaryColor,
         child: Row(
           children: [
-            // IconButton(icon: Icon(Icons.menu), onPressed: () {}),
-            Spacer(),
-            IconButton(icon: Icon(Icons.search), onPressed: () {}),
-            IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+            Flexible(
+              child: RadioListTile(
+                title: Text(
+                  'Русский',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+                value: 'ru',
+                groupValue: language,
+                onChanged: (value) => setLanguage(value),
+              ),
+            ),
+            Flexible(
+              child: RadioListTile(
+                title: Text(
+                  'English',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+                value: 'en',
+                groupValue: language,
+                onChanged: (value) => setLanguage(value),
+              ),
+            )
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
             blinkSectors();
           }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

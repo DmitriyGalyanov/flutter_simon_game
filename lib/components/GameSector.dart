@@ -22,7 +22,7 @@ class GameSector extends StatelessWidget {
         onTap: _handleTap,
         child: AnimatedOpacity(
           duration: Duration(milliseconds: animationDuration.floor()),
-          opacity: isHighlighted ? 1.0 : 0.5,
+          opacity: isHighlighted ? 1.0 : 0.3,
           child: SizedBox(
               width: 100.0,
               height: 100.0,
