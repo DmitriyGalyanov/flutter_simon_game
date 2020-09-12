@@ -22,15 +22,34 @@ class _SimonGameState extends State<SimonGame> {
   //   player.loadAll(['0.ogg', '1.ogg', '2.ogg', '3.ogg']);
   // }
   void playAudio(int sectorId) {
-    //TODO: ADD SECTOR ID HERE
     AudioCache player = AudioCache();
     // player.play('$sectorId.ogg');
     player.play('sample.mp3');
   }
 
   // GAME VARIABLES -- START
-  int timeout = 1000; //TODO: ADD TIMEOUT CHANGE
+  int timeout = 1000;
   String language = 'en'; //TODO: ADD LANGUAGE CHANGE
+  Map languageLocales = {
+    'ru': {
+      'roundLabel': 'Раунд',
+      'startNewGameButtonLabel': 'Новая игра',
+      'repeatHighlightButtonLabel': 'Повторить последовательность',
+      'tryLostRoundButtonLabel': 'Повторить последний раунд',
+      'setEasyButtonLabel': 'легко',
+      'setMediumButtonLabel': 'средне',
+      'setHardButtonLabel': 'сложно'
+    },
+    'en': {
+      'roundLabel': 'Round',
+      'startNewGameButtonLabel': 'New game',
+      'repeatHighlightButtonLabel': 'Repeat highlight',
+      'tryLostRoundButtonLabel': 'Try lost round again',
+      'setEasyButtonLabel': 'easy',
+      'setMediumButtonLabel': 'medium',
+      'setHardButtonLabel': 'hard'
+    }
+  };
   int roundNumber = 0;
   bool isGameOn = false;
   bool isUserFail = false;
@@ -225,23 +244,27 @@ class _SimonGameState extends State<SimonGame> {
                     child: Column(
                       children: [
                         Text(
-                          'Round number: $roundNumber',
+                          '${languageLocales[language]
+                            ['roundLabel']}:$roundNumber',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20.0),
                         ),
                         if (!isGameOn)
                           Button(
-                            label: 'Start new game',
+                            label: languageLocales[language]
+                                ['startNewGameButtonLabel'],
                             handleTap: startGame,
                           ),
                         if (isGameOn)
-                          Button(
-                              label: 'Repeat highlight',
+                          Button( //TODO: stop wrap with ru
+                              label: languageLocales[language]
+                                ['repeatHighlightButtonLabel'],
                               handleTap: repeatHighlight,
                               isDisabled: isBlinking ? true : false),
                         if (isUserFail)
                           Button(
-                            label: 'Try last round again',
+                            label: languageLocales[language]
+                              ['tryLostRoundButtonLabel'],
                             handleTap: tryLostRound,
                           ),
                       ],
@@ -253,7 +276,8 @@ class _SimonGameState extends State<SimonGame> {
               Column(children: [
                 RadioListTile(
                   title: Text(
-                    'easy',
+                    languageLocales[language]
+                    ['setEasyButtonLabel'],
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
@@ -263,7 +287,8 @@ class _SimonGameState extends State<SimonGame> {
                 ),
                 RadioListTile(
                   title: Text(
-                    'medium',
+                    languageLocales[language]
+                    ['setMediumButtonLabel'],
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
@@ -273,7 +298,8 @@ class _SimonGameState extends State<SimonGame> {
                 ),
                 RadioListTile(
                   title: Text(
-                    'hard',
+                    languageLocales[language]
+                    ['setHardButtonLabel'],
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
@@ -315,12 +341,6 @@ class _SimonGameState extends State<SimonGame> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            blinkSectors();
-          }),
     );
   }
 }

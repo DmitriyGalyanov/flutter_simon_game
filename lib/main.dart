@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Simon Game',
         theme: ThemeData(
-            primaryColor: Colors.purpleAccent
+            primaryColor: Colors.purpleAccent,
+            accentColor: Colors.cyan
         ),
         home: SimonGame(0)
     );
