@@ -149,7 +149,6 @@ class _SimonGameState extends State<SimonGame> {
   }
 
   checkIfUserFail(sectorId) {
-    print(gameSelectedSectorsList[userSelectedSectorsList.length - 1]);
     if (gameSelectedSectorsList[userSelectedSectorsList.length - 1] !=
         sectorId) {
       setIsUserFail(true);
@@ -217,7 +216,6 @@ class _SimonGameState extends State<SimonGame> {
     });
     return Wrap(
       direction: Axis.vertical,
-      // alignment: WrapAlignment.center,
       children: [
         Row(children: sectors.sublist(0, 2)),
         Row(children: sectors.sublist(2, 4))
@@ -478,12 +476,9 @@ class _SimonGameState extends State<SimonGame> {
   @override
   Widget build(BuildContext context) {
     //TODO: edit view
-    //TODO: (!HORIZONTAL VIEW!)
-    if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return portraitLayout();
-    }
-    if (MediaQuery.of(context).orientation == Orientation.landscape) {
-      return landscapeLayout();
+    switch (MediaQuery.of(context).orientation) {
+      case Orientation.portrait: return portraitLayout();
+      case Orientation.landscape: return landscapeLayout();
     }
   }
 }
