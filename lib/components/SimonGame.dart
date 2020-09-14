@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 
-import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:assets_audio_player/assets_audio_player.dart';
 
 import 'package:flutter_simon_game/components/GameSector.dart';
 import 'package:flutter_simon_game/components/Button.dart';
@@ -22,11 +23,25 @@ class _SimonGameState extends State<SimonGame> {
   // preloadAudio() {
   //   player.loadAll(['0.ogg', '1.ogg', '2.ogg', '3.ogg']);
   // }
-  void playAudio(int sectorId) {
-    AudioCache player = AudioCache();
-    // player.play('$sectorId.ogg');
-    player.play('sample.mp3');
-  }
+  // void playAudio(int sectorId) { // via audioplayers
+  //   AudioCache player = AudioCache();
+  //   player.play('$sectorId.ogg');
+  //   // player.play('sample.mp3');
+  // }
+  // final _assetsAudioPlayer = AssetsAudioPlayer();
+  // void playAudio(int sectorId) {
+    // print(sectorId);
+    // _assetsAudioPlayer.open(AssetsAudio(
+    //   asset: "$sectorId.ogg",
+    //   folder: "assets/audio/gameAudio/"
+    // ));
+    // _assetsAudioPlayer.open(
+    //   AssetsAudio(
+    //     asset: assets[_currentAssetPosition],
+    //     folder: "assets/audios/",
+    //   ),
+    // );
+  // }
 
   // GAME VARIABLES -- START
   int timeout = 1000;
@@ -167,7 +182,7 @@ class _SimonGameState extends State<SimonGame> {
 
   void blinkSector(int sectorId) {
     //TODO: ADD AUDIO
-    // playAudio(sectorId); TODO: FIX THAT
+    // playAudio(sectorId); //TODO: FIX THAT
     setState(() {
       sectorsInit[sectorId]['isHighlighted'] = true;
     });
